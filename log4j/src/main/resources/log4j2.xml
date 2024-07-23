@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <Properties>
+        <Property name="LOG_PATTERN">%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</Property>
+        <Property name="APP_LOG_ROOT">C:\Users\kaan_\i2i\log4j</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </Console>
+
+        <RollingFile name="DebugLog"
+                     fileName="${APP_LOG_ROOT}/logs/Timer-debug-${date:dd-MM-yyyy}.log"
+                     filePattern="${APP_LOG_ROOT}/debug-log-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <RollingFile name="ErrorLog"
+                     fileName="${APP_LOG_ROOT}/logs/Timer-error-${date:dd-MM-yyyy}.log"
+                     filePattern="${APP_LOG_ROOT}/error-log-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+        <RollingFile name="InfoLog"
+                     fileName="${APP_LOG_ROOT}/logs/Timer-info-${date:dd-MM-yyyy}.log"
+                     filePattern="${APP_LOG_ROOT}/info-log-%d{yyyy-MM-dd}-%i.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+
+    </Appenders>
+    <Loggers>
+        <Logger name="DebugLog" level="debug" additivity="false">
+            <AppenderRef ref="DebugLog"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="ErrorLog" level="error" additivity="false">
+            <AppenderRef ref="ErrorLog"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="InfoLog" level="info" additivity="false">
+            <AppenderRef ref="InfoLog"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
+
+
+
