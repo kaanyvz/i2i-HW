@@ -8,6 +8,7 @@ public class OracleOps {
     private String username = "C##KAAN";
     private String password = "password";
 
+    //insert ops. for oracle db.
     public long insertRandomNumbers(int count) {
         long startTime = System.nanoTime();
         try (Connection connection = DriverManager.getConnection(dbUrl, username, password);
@@ -23,9 +24,10 @@ public class OracleOps {
             System.out.println(e.getMessage());
         }
         long endTime = System.nanoTime();
-        return (endTime - startTime) / 1_000_000; // Convert to milliseconds
+        return (endTime - startTime) / 1_000_000;
     }
 
+    //select ops. for oracle db
     public long selectRandomNumbers() {
         long startTime = System.nanoTime();
         try (Connection connection = DriverManager.getConnection(dbUrl, username, password);
@@ -34,13 +36,13 @@ public class OracleOps {
             String sql = "SELECT NUMBER_VALUE FROM RANDOM_NUMBERS";
             try (ResultSet resultSet = statement.executeQuery(sql)) {
                 while (resultSet.next()) {
-                    resultSet.getInt(1); // Fetch all values
+                    resultSet.getInt(1);
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
         long endTime = System.nanoTime();
-        return (endTime - startTime) / 1_000_000; // Convert to milliseconds
+        return (endTime - startTime) / 1_000_000;
     }
 }
