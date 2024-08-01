@@ -25,14 +25,14 @@ public class Ignite {
             Connection connection = DriverManager.getConnection(jdbcURL);
 
                 Statement statement = connection.createStatement();
-                ResultSet rs = statement.executeQuery("SELECT * FROM SUBSCRIBER");
+                ResultSet resultSet = statement.executeQuery("SELECT * FROM SUBSCRIBER");
 
-                while (rs.next()){
-                    int subscId = rs.getInt("SUBSC_ID");
-                    String subscName = rs.getString("SUBSC_NAME");
-                    String subscLName = rs.getString("SUBSC_SURNAME");
+                while (resultSet.next()){
+                    int subscriberId = resultSet.getInt("SUBSC_ID");
+                    String subscriberName = resultSet.getString("SUBSC_NAME");
+                    String subscriberLastname = resultSet.getString("SUBSC_SURNAME");
 
-                    logger.info("{} {} {}", subscId, subscName, subscLName);
+                    logger.info("{} {} {}", subscriberId, subscriberName, subscriberLastname);
                 }
 
         }catch(ClientConnectionException | ClassNotFoundException ce){
